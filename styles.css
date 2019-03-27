@@ -1,0 +1,53 @@
+/** BASE STYLES */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --color-default: #6c7589;
+  --color-primary: #fed136;
+  --color-primary-dark: #fec810;
+}
+
+::selection {
+  background-color: var(--color-primary);
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  background-color: #fff;
+  color: var(--color-default);
+  font: 1.6rem/1.4 'Roboto Slab', serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Montserrat';
+  line-height: 1.2;
+}
+
+h1,
+h2,
+h3,
+p,
+ul {
+  margin-top: 0;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
