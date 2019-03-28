@@ -8,6 +8,12 @@
       href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto+Slab"
       rel="stylesheet"
     />
+    <link
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      rel="stylesheet"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
     <link href="styles.css" rel="stylesheet" />
   </head>
   <body>
@@ -32,36 +38,49 @@
 
     <main>
       <section class="services">
-        <header>
-          <h2>Services</h2>
-          <p>Elit assumenda voluptatibus porro corrupti hic?</p>
-        </header>
-        <ul>
-          <li>
-            <h3>E-Commerce</h3>
-            <p>
-              Elit ad ex explicabo optio quasi sit Quia illum aliquid laborum
-              eligendi id Eos porro aperiam distinctio recusandae eum
-              accusantium
+        <div class="container">
+          <header>
+            <h2 class="title">Services</h2>
+            <p class="subtitle">
+              Elit assumenda voluptatibus porro corrupti hic?
             </p>
-          </li>
-          <li>
-            <h3>Responsive Design</h3>
-            <p>
-              Dolor ad doloribus corrupti sed quo eos Adipisicing non sunt
-              libero architecto corporis ipsam Sunt esse dignissimos in commodi
-              odio
-            </p>
-          </li>
-          <li>
-            <h3>Web Security</h3>
-            <p>
-              Amet repellat aliquam tempore quaerat fuga aut! Nemo veniam
-              distinctio reprehenderit quod dolorum odit Ut nam dolores magni
-              odio nulla
-            </p>
-          </li>
-        </ul>
+          </header>
+          <ul class="flex-list">
+            <li class="flex-list-item service">
+              <span
+                class="service-icon fas fa-shopping-cart"
+                aria-hidden="true"
+              ></span>
+              <h3 class="title">E-Commerce</h3>
+              <p>
+                Elit ad ex explicabo optio quasi sit Quia illum aliquid laborum
+                eligendi id Eos porro aperiam distinctio recusandae eum
+                accusantium
+              </p>
+            </li>
+            <li class="flex-list-item service">
+              <span
+                class="service-icon fas fa-laptop"
+                aria-hidden="true"
+              ></span>
+              <h3 class="title">Responsive Design</h3>
+              <p>
+                Dolor ad doloribus corrupti sed quo eos Adipisicing non sunt
+                libero architecto corporis ipsam Sunt esse dignissimos in
+                commodi odio
+              </p>
+            </li>
+            <li class="flex-list-item service">
+              <span class="service-icon fas fa-lock" aria-hidden="true"></span>
+              <h3 class="title">Web Security</h3>
+              <p>
+                Amet repellat aliquam tempore quaerat fuga aut! Nemo veniam
+                distinctio reprehenderit quod dolorum odit Ut nam dolores magni
+                odio nulla
+              </p>
+            </li>
+          </ul>
+        </div>
       </section>
 
       <section class="portfolio">

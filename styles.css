@@ -7,9 +7,12 @@
 }
 
 :root {
+  --color-black: #212529;
   --color-default: #6c7589;
   --color-primary: #fed136;
   --color-primary-dark: #fec810;
+  --system-font-stack: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica,
+    Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
 }
 
 ::selection {
@@ -23,7 +26,7 @@ html {
 body {
   background-color: #fff;
   color: var(--color-default);
-  font: 1.6rem/1.4 'Roboto Slab', serif;
+  font: 1.6rem/1.7 'Roboto Slab', serif;
   margin: 0;
   padding: 0;
 }
@@ -50,4 +53,111 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+/** LAYOUT */
+
+.container {
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(1.5rem, 1fr)
+    [main-start] minmax(0, 111rem)
+    [main-end] minmax(1.5rem, 1fr)
+    [full-end];
+}
+
+.container > * {
+  grid-column: main;
+}
+
+/**
+ * A flexible list that can wrap content if the viewport is too narrow.
+ */
+
+.flex-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/**
+ * A flexible list item.
+ *
+ * 1. Set width as much if there is space available to grow, regardless of
+ * content width.
+ * 2. Styles for .title elements in an item.
+ * 3. Horizontal centering, especially for items that are wrapped to new lines.
+ */
+
+.flex-list-item {
+  --title-size: 2.4rem; /* 2 */
+  --title-transform: none; /* 2 */
+  margin: auto; /* 3 */
+  flex: auto; /* 1 */
+  max-width: 35rem; /* 1 */
+  text-align: center;
+}
+
+/** COMMON */
+
+.title,
+.subtitle {
+  text-align: center;
+}
+
+/**
+ * A title can be a title of a section, or a title in a list item. Styles can be
+ * set depending on context (e.g., item titles are smaller than section titles).
+ */
+
+.title {
+  color: var(--color-black);
+  font-size: var(--title-size, 4rem);
+  text-transform: var(--title-transform, uppercase);
+  margin-bottom: 1.5rem;
+}
+
+/**
+ * A section subtitle. Placed directly under a section title.
+ */
+
+.subtitle {
+  font-family: 'Droid Serif', var(--system-font-stack);
+  font-style: italic;
+  margin-bottom: 7.5rem;
+}
+
+/** SERVICES */
+
+.services {
+  padding: 16rem 0;
+}
+
+/**
+ * Large circle with a glaring icon for each service. Applied directly on Font
+ * Awesome icons:
+ *
+ * <span class="service-icon fas fa-..."></span>
+ *
+ * 1. Center the icon within the circle.
+ * 2. Some breathing space between the icon and the circle edge.
+ * 3. Explicit sizes to maintain circular shape.
+ */
+
+.service-icon {
+  --size: 12.5rem; /* 3 */
+  align-items: center; /* 1 */
+  display: flex; /* 1 */
+  justify-content: center; /* 1 */
+  padding: 2rem; /* 2 */
+  height: var(--size); /* 3 */
+  width: var(--size); /* 3 */
+  background: var(--color-primary);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 6.4rem;
+  margin: 0 auto 1.5rem;
 }
