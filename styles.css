@@ -137,36 +137,37 @@ a:hover {
   margin-bottom: var(--subtitle-margin-bottom, 7.5rem);
 }
 
-/** SERVICES */
-
-.services {
-  padding: 16rem 0;
-}
-
 /**
- * Large circle with a glaring icon for each service. Applied directly on Font
- * Awesome icons:
+ * Icon in a circle. Applied directly on Font Awesome icons:
  *
  * <span class="service-icon fas fa-..."></span>
  *
  * 1. Center the icon within the circle.
  * 2. Some breathing space between the icon and the circle edge.
- * 3. Explicit sizes to maintain circular shape.
  */
 
-.service-icon {
-  --size: 12.5rem; /* 3 */
+.icon {
   align-items: center; /* 1 */
   display: flex; /* 1 */
   justify-content: center; /* 1 */
   padding: 2rem; /* 2 */
-  height: var(--size); /* 3 */
-  width: var(--size); /* 3 */
-  background: var(--color-primary);
+  height: var(--icon-size);
+  width: var(--icon-size);
+  background: var(--icon-color);
   border-radius: 50%;
   color: #fff;
-  font-size: 6.4rem;
+  font-size: var(--icon-font-size);
   margin: 0 auto 1.5rem;
+  transition: background ease-in-out .25s;
+}
+
+/** SERVICES */
+
+.services {
+  --icon-size: 12.5rem;
+  --icon-font-size: 6.4rem;
+  --icon-color: var(--color-primary);
+  padding: 16rem 0;
 }
 
 /** PORTFOLIO */
@@ -198,4 +199,59 @@ a:hover {
   max-width: 350px;
   width: 100%;
   order: -1; /* 1 */
+}
+
+/** TEAM */
+
+.team {
+  background: var(--color-lightgray);
+  padding: 16rem 0;
+}
+
+.team-members {
+  margin-bottom: 3rem;
+}
+
+.team-member {
+  --title-margin-bottom: 0;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.team-member-portrait {
+  border-radius: 50%;
+  border: .75rem solid #fff;
+  margin-bottom: 2rem;
+  order: -1;
+}
+
+.team-bottom-prose {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 72rem;
+}
+
+/** SOCIAL MEDIA LINKS */
+
+.social {
+  --gap: 1.25rem;
+  --icon-size: 5rem;
+  --icon-font-size: 2rem;
+  --icon-color: var(--color-black);
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  margin-right: calc(-1 * var(--gap));
+  padding: 0;
+}
+
+.social-item {
+  margin-right: var(--gap);
+}
+
+.social a:hover {
+  --icon-color: var(--color-primary);
+  text-decoration: none;
 }
