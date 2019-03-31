@@ -8,6 +8,7 @@
 
 :root {
   --color-black: #212529;
+  --color-lightgray: #f8f9fa;
   --color-default: #6c7589;
   --color-primary: #fed136;
   --color-primary-dark: #fec810;
@@ -72,6 +73,10 @@ a:hover {
 
 /**
  * A flexible list that can wrap content if the viewport is too narrow.
+ *
+ * 1. Horizontal gap between wrapped flex items. When set, adds an equivalent
+ * negative bottom margin to the list itself to cancel the last item's bottom
+ * margin.
  */
 
 .flex-list {
@@ -79,25 +84,27 @@ a:hover {
   flex-wrap: wrap;
   justify-content: space-between;
   list-style: none;
-  margin: 0;
+  margin: 0 0 calc(-1 * var(--flex-list-vertical-gap)); /* 1 */
   padding: 0;
 }
 
 /**
  * A flexible list item.
  *
- * 1. Set width as much if there is space available to grow, regardless of
- * content width.
+ * 1. Maximum item width. Item doesn't grow, but shrinks when necessary (default
+ * behavior).
  * 2. Styles for .title elements in an item.
  * 3. Horizontal centering, especially for items that are wrapped to new lines.
+ * 4. Vertical gap between flex items.
  */
 
 .flex-list-item {
   --title-size: 2.4rem; /* 2 */
   --title-transform: none; /* 2 */
-  margin: auto; /* 3 */
-  flex: auto; /* 1 */
-  max-width: 35rem; /* 1 */
+  --subtitle-margin-bottom: 0;
+  background: var(--flex-list-item-background, inherit);
+  flex-basis: 35rem; /* 1 */
+  margin: 0 auto var(--flex-list-vertical-gap); /* 3, 4 */
   text-align: center;
 }
 
@@ -117,7 +124,7 @@ a:hover {
   color: var(--color-black);
   font-size: var(--title-size, 4rem);
   text-transform: var(--title-transform, uppercase);
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--title-margin-bottom, 1.5rem);
 }
 
 /**
@@ -127,7 +134,7 @@ a:hover {
 .subtitle {
   font-family: 'Droid Serif', var(--system-font-stack);
   font-style: italic;
-  margin-bottom: 7.5rem;
+  margin-bottom: var(--subtitle-margin-bottom, 7.5rem);
 }
 
 /** SERVICES */
@@ -160,4 +167,35 @@ a:hover {
   color: #fff;
   font-size: 6.4rem;
   margin: 0 auto 1.5rem;
+}
+
+/** PORTFOLIO */
+
+.portfolio {
+  --flex-list-vertical-gap: 3rem;
+  --flex-list-item-background: #fff;
+  background: var(--color-lightgray);
+  padding: 16rem 0;
+}
+
+/**
+ * A portflio item consists of a title, an image and a subtitle.
+ *
+ * 1. Allow reordering of image before title.
+ */
+
+.portfolio-item {
+  --title-margin-bottom: 0;
+  --subtitle-margin-bottom: 2.5rem;
+  display: flex; /* 1 */
+  flex-direction: column; /* 1 */
+}
+
+.portfolio-image {
+  display: block;
+  height: auto;
+  margin: 0 auto 2.5rem;
+  max-width: 350px;
+  width: 100%;
+  order: -1; /* 1 */
 }
