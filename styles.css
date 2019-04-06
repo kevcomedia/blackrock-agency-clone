@@ -113,7 +113,7 @@ a:hover {
 
 .title,
 .subtitle {
-  text-align: center;
+  text-align: var(--title-align, center);
 }
 
 /**
@@ -241,6 +241,82 @@ a:hover {
   max-width: 350px;
   width: 100%;
   order: -1; /* 1 */
+}
+
+/** ABOUT */
+
+.about {
+  padding: 16rem 0;
+}
+
+.timeline {
+  --title-align: left;
+  --title-color: var(--color-black);
+  --title-size: 2.4rem;
+  --title-transform: none;
+  --borders-color: #e9ecef;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+.timeline::before {
+  background: var(--borders-color);
+  content: '';
+  display: block;
+  height: 100%;
+  left: 0;
+  margin-left: 4.8rem;
+  position: absolute;
+  width: .2rem;
+}
+
+.timeline-item {
+  --node-size: 8rem;
+  margin-bottom: 5rem;
+  padding-left: 10rem;
+  position: relative;
+}
+
+.timeline-item::before {
+  background: var(--background-fallback) center / cover var(--background);
+  border-radius: 50%;
+  border: .8rem solid var(--borders-color);
+  content: '';
+  display: block;
+  height: var(--node-size);
+  left: 0;
+  margin-left: 1rem;
+  position: absolute;
+  width: var(--node-size);
+}
+
+.timeline-item:last-child::before {
+  align-items: center;
+  background: var(--color-primary);
+  color: #fff;
+  content: 'Be Part Of Our Story!';
+  display: flex;
+  font: 700 1rem/1.4 'Montserrat', sans-serif;
+  text-align: center;
+}
+
+.timeline-item:first-child {
+  --background: url('https://images.pexels.com/photos/618833/pexels-photo-618833.jpeg?auto=compress&cs=tinysrgb&fit=crop&crop=entropy&w=160&h=160');
+  --background-fallback: #483c31;
+}
+.timeline-item:nth-child(2) {
+  --background: url('https://images.pexels.com/photos/1098745/pexels-photo-1098745.jpeg?auto=compress&cs=tinysrgb&fit=crop&crop=entropy&w=160&h=160');
+  --background-fallback: #78520f;
+}
+.timeline-item:nth-child(3) {
+  --background: url('https://images.pexels.com/photos/257897/pexels-photo-257897.jpeg?auto=compress&cs=tinysrgb&fit=crop&crop=entropy&w=160&h=160');
+  --background-fallback: #2c2c2c;
+}
+.timeline-item:nth-child(4) {
+  --background: url('https://images.pexels.com/photos/9754/mountains-clouds-forest-fog.jpg?auto=compress&cs=tinysrgb&fit=crop&crop=entropy&w=160&h=160');
+  --background-fallback: #608091;
 }
 
 /** TEAM */
