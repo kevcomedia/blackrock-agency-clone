@@ -63,7 +63,7 @@ a:hover {
   display: grid;
   grid-template-columns:
     [full-start] minmax(1.5rem, 1fr)
-    [main-start] minmax(0, 111rem)
+    [main-start] minmax(0, var(--content-max-size, 111rem))
     [main-end] minmax(1.5rem, 1fr)
     [full-end];
 }
@@ -246,11 +246,11 @@ a:hover {
 /** ABOUT */
 
 .about {
+  --content-max-size: 90rem;
   padding: 16rem 0;
 }
 
 .timeline {
-  --title-align: left;
   --title-color: var(--color-black);
   --title-size: 2.4rem;
   --title-transform: none;
@@ -272,12 +272,35 @@ a:hover {
   width: .2rem;
 }
 
+/**
+ * A timeline item. An item consists of a title, text, and a decorative image
+ * which is centered along the timeline. By default the graphic is on the left
+ * and the text is left-aligned.
+ *
+ * On wider viewports the timeline graphic is positioned on the center. Each
+ * item then alternates between being on the left and right side of the graphic.
+ *
+ * 1. Title and text alignment. Titles are set to be centered, so a custom
+ * property has to be introduced here.
+ * 2. Allocate space for the item image.
+ * 3. Image positioning. Center the image within the item's left margin.
+ */
+
 .timeline-item {
-  --node-size: 8rem;
+  --align: left; /* 1 */
+  --title-align: var(--align); /* 1 */
+  --image-offset: -9rem; /* 3 */
+  --image-left: var(--image-offset); /* 3 */
+  --image-size: 8rem;
   margin-bottom: 5rem;
-  padding-left: 10rem;
+  margin-left: 10rem; /* 2 */
   position: relative;
+  text-align: var(--align);
 }
+
+/**
+ * A timeline item's image. Left-aligned on mobile, centered otherwise.
+ */
 
 .timeline-item::before {
   background: var(--background-fallback) center / cover var(--background);
@@ -285,11 +308,24 @@ a:hover {
   border: .8rem solid var(--borders-color);
   content: '';
   display: block;
-  height: var(--node-size);
-  left: 0;
-  margin-left: 1rem;
+  height: var(--image-size);
+  left: var(--image-left);
+  right: var(--image-right);
   position: absolute;
-  width: var(--node-size);
+  width: var(--image-size);
+}
+
+/**
+ * The last "node" is not an image, but contains text. Since the content will
+ * not be picked up by screen readers, it's important that this item has the
+ * same text in markup (but visually hidden).
+ *
+ * 1. Explicit height to compensate for lack of content in normal flow.
+ */
+
+.timeline-item:last-child {
+  height: var(--image-size); /* 1 */
+  margin-bottom: 0;
 }
 
 .timeline-item:last-child::before {
@@ -297,10 +333,21 @@ a:hover {
   background: var(--color-primary);
   color: #fff;
   content: 'Be Part Of Our Story!';
+  justify-content: center;
   display: flex;
   font: 700 1rem/1.4 'Montserrat', sans-serif;
   text-align: center;
 }
+
+@media screen and (min-width: 992px) {
+  .timeline-item:last-child::before {
+    font-size: 1.6rem;
+  }
+}
+
+/**
+ * Images and fallback colors for each item image.
+ */
 
 .timeline-item:first-child {
   --background: url('https://images.pexels.com/photos/618833/pexels-photo-618833.jpeg?auto=compress&cs=tinysrgb&fit=crop&crop=entropy&w=160&h=160');
@@ -317,6 +364,65 @@ a:hover {
 .timeline-item:nth-child(4) {
   --background: url('https://images.pexels.com/photos/9754/mountains-clouds-forest-fog.jpg?auto=compress&cs=tinysrgb&fit=crop&crop=entropy&w=160&h=160');
   --background-fallback: #608091;
+}
+
+/**
+ * 1. From here onwards, the timeline graphic is horizontally centered. Each
+ * item alternates on the left and right side of the graphic.
+ */
+
+@media screen and (min-width: 768px) { /* 1 */
+  /**
+   * 1. Center timeline bar.
+   */
+
+  .timeline::before {
+    margin-left: calc(50% - .1rem); /* 1 */
+  }
+  
+  /**
+   * 1. Position image to timeline center, allocating 3rem breathing space
+   * between image edge and text.
+   * 2. Use as much of the whole timeline element's half width as possible while
+   * maintaining 3rem breathing space.
+   * 3. Push even-numbered items to the right.
+   */
+  
+  .timeline-item {
+    --image-size: 10rem;
+    --image-offset: calc(-1 * var(--image-size) - 3rem); /* 1 */
+    --half-space: calc(var(--image-size) / 2 + 3rem);
+    max-width: calc(50% - var(--half-space)); /* 2 */
+    margin-bottom: 15rem;
+    margin-left: calc(50% + var(--half-space)); /* 3 */
+  }
+  
+  /**
+   * The odd-numbered items are more of a special case. Their image is
+   * positioned to the right of their text, so it's necessary to unset the left
+   * property [1]. The text is also right-aligned [2]. Finally it's necessary to
+   * remove the initial left margin, since the image is no longer there [3].
+   */
+  
+  .timeline-item:nth-child(odd) {
+    --align: right; /* 2 */
+    --image-left: unset; /* 1 */
+    --image-right: var(--image-offset); /* 1 */
+    margin-left: 0; /* 3 */
+  }
+}
+
+/**
+ * 1. The image just gets larger from here. The offsets and such are derived
+ * from the image size.
+ */
+
+@media screen and (min-width: 992px) { /* 1 */
+  .timeline-item { --image-size: 15rem; }
+}
+
+@media screen and (min-width: 1200px) {
+  .timeline-item { --image-size: 17rem; }
 }
 
 /** TEAM */
