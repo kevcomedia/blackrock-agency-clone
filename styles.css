@@ -345,9 +345,17 @@ a:hover {
   margin-right: var(--gap);
 }
 
-.social a:hover {
+.social a:hover,
+.social a:focus {
   --icon-color: var(--color-primary);
+}
+
+.social a:hover {
   text-decoration: none;
+}
+
+.social a:focus {
+  outline: 0;
 }
 
 /** FOOTER */
