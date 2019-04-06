@@ -302,20 +302,31 @@
       </section>
 
       <section class="contact">
-        <header>
-          <h2>Contact Us</h2>
-          <p>Amet dolores dolorem harum deserunt dignissimos</p>
-        </header>
-        <form method="post">
-          <label for="name">Your Name</label>
-          <input name="name" placeholder="Your Name *" />
-          <label for="email">Your Email</label>
-          <input type="email" name="email" placeholder="Your Email *" />
-          <label for="phone">Your Phone</label>
-          <input type="tel" name="phone" placeholder="Your Phone *" />
-          <textarea name="message" placeholder="Your Message *"></textarea>
-          <input type="submit" value="Send Message" />
-        </form>
+        <div class="container">
+          <header>
+            <h2 class="title">Contact Us</h2>
+            <p class="subtitle">
+              Amet dolores dolorem harum deserunt dignissimos
+            </p>
+          </header>
+          <form class="contact-form" method="post">
+            <div class="form-columns">
+              <div class="form-column">
+                <label class="sr-only" for="name">Your Name</label>
+                <input class="form-control form-name" id="name" name="name" placeholder="Your Name *" required />
+                <label class="sr-only" for="email">Your Email</label>
+                <input class="form-control form-email" id="email" type="email" name="email" placeholder="Your Email *" required />
+                <label class="sr-only" for="phone">Your Phone</label>
+                <input class="form-control form-phone" id="phone" type="tel" name="phone" placeholder="Your Phone *" required />
+                <label class="sr-only" for="message">Your Phone</label>
+              </div>
+              <div class="form-column">
+                <textarea class="form-control form-message" id="message" name="message" placeholder="Your Message *" required></textarea>
+              </div>
+            </div>
+            <input class="btn form-submit" type="submit" value="Send Message" />
+          </form>
+        </div>
       </section>
     </main>
 
