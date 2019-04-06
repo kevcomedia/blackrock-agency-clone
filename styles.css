@@ -158,7 +158,7 @@ a:hover {
   border-radius: 50%;
   color: #fff;
   font-size: var(--icon-font-size);
-  margin: 0 auto 1.5rem;
+  margin: 0 auto var(--icon-margin-bottom);
   transition: background ease-in-out .25s;
 }
 
@@ -208,6 +208,7 @@ a:hover {
   --icon-size: 12.5rem;
   --icon-font-size: 6.4rem;
   --icon-color: var(--color-primary);
+  --icon-margin-bottom: 1.5rem;
   padding: 16rem 0;
 }
 
@@ -347,4 +348,43 @@ a:hover {
 .social a:hover {
   --icon-color: var(--color-primary);
   text-decoration: none;
+}
+
+/** FOOTER */
+
+/**
+ * The footer uses a stacking layout by default, and uses a horizontal flex
+ * layout on larger viewports.
+ */
+
+.footer {
+  --icon-margin-bottom: 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.4rem;
+  padding: 2.5rem 0;
+  text-align: center;
+}
+
+.footer-links a:first-child {
+  margin-right: 2rem;
+}
+
+/**
+ * It's easier to use media queries to achieve the horizontal layout.
+ * I don't know if there's an entirely flex-based solution to achieve the same
+ * effect.
+ */
+
+@media screen and (min-width: 768px) {
+  .footer {
+    --icon-margin-bottom: 0;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    text-align: initial;
+  }
+  
+  .copyright {
+    margin: 0;
+  }
 }
