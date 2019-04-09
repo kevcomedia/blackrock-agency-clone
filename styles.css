@@ -261,6 +261,36 @@ a:hover {
   max-height: 9999px;
 }
 
+@media screen and (min-width: 992px) {
+  .navbar {
+    padding: 0;
+  }
+  
+  .navbar-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .nav-brand a {
+    padding: 1rem 0;
+  }
+
+  .navbar-toggle {
+    display: none;
+  }
+  
+  .navbar-links {
+    max-height: 9999px;
+    display: flex;
+    overflow: unset;
+  }
+  
+  .navbar-links a {
+    padding: 1.5rem;
+  }
+}
+
 /** MASTHEAD */
 
 .masthead {
