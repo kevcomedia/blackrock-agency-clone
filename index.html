@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width; initial-scale=1" />
     <title>Clone - StartBootstrap Agency</title>
     <link
-      href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto+Slab"
+      href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto+Slab|Caveat"
       rel="stylesheet"
     />
     <link
@@ -18,15 +18,22 @@
   </head>
   <body>
     <header>
-      <nav>
-        <h1 class="nav-brand">Start Bootstrap</h1>
-        <ul>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Portfolio</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Team</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
+      <nav class="navbar">
+        <div class="container">
+          <div class="navbar-inner">
+            <header class="navbar-header">
+              <h1 class="nav-brand"><a href="#top">Start Bootstrap</a></h1>
+              <button class="navbar-toggle" type="button">Menu <span class="fas fa-bars" aria-hidden="true"></span></button>
+            </header>
+            <ul class="navbar-links">
+              <li><a href="#">Services</a></li>
+              <li><a href="#">Portfolio</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Team</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+        </div>
       </nav>
 
       <div class="masthead">
@@ -361,5 +368,6 @@
         </div>
       </footer>
     </div>
+    <script src="main.js"></script>
   </body>
 </html>

@@ -49,12 +49,13 @@ ul {
 }
 
 a {
-  color: var(--color-primary);
+  color: var(--link-color, var(--color-primary));
   text-decoration: none;
 }
 
 a:hover {
-  text-decoration: underline;
+  color: var(--link-color-hover, var(--color-primary));
+  text-decoration: var(--link-decoration-hover, underline);
 }
 
 /** LAYOUT */
@@ -203,6 +204,61 @@ a:hover {
 
 .btn::-moz-focus-inner {
   border: none;
+}
+
+/** NAVBAR */
+
+.navbar {
+  --link-decoration-hover: none;
+  background: var(--color-black);
+  padding: 1rem 0;
+  position: fixed;
+  width: 100%;
+}
+
+.navbar a {
+  display: block;
+  padding: var(--link-padding, 1rem) 0;
+}
+
+.navbar-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-brand {
+  --link-padding: .4rem;
+  font-family: 'Caveat', cursive;
+  font-weight: 400;
+  margin: 0;
+}
+
+.navbar-toggle {
+  background: var(--color-primary);
+  border-radius: .3rem;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 1rem 2rem;
+  text-transform: uppercase;
+}
+
+.navbar-links {
+  --link-color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.4rem;
+  max-height: 0;
+  list-style: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.navbar-links.active {
+  max-height: 9999px;
 }
 
 /** MASTHEAD */
