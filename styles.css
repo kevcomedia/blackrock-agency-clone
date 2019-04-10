@@ -1,0 +1,699 @@
+/** BASE STYLES */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --color-black: #212529;
+  --color-lightgray: #f8f9fa;
+  --color-default: #6c7589;
+  --color-primary: #fed136;
+  --color-primary-transparent: rgba(254, 209, 54, .5);
+  --color-primary-dark: #fec810;
+  --system-font-stack: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica,
+    Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+}
+
+::selection {
+  background-color: var(--color-primary);
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  background-color: #fff;
+  color: var(--color-default);
+  font: 1.6rem/1.7 'Roboto Slab', serif;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Montserrat';
+  line-height: 1.2;
+}
+
+h1,
+h2,
+h3,
+p,
+ul {
+  margin-top: 0;
+}
+
+a {
+  color: var(--link-color, var(--color-primary));
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--link-color-hover, var(--color-primary));
+  text-decoration: var(--link-decoration-hover, underline);
+}
+
+/** LAYOUT */
+
+.container {
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(1.5rem, 1fr)
+    [main-start] minmax(0, var(--content-max-size, 111rem))
+    [main-end] minmax(1.5rem, 1fr)
+    [full-end];
+}
+
+.container > * {
+  grid-column: main;
+}
+
+/**
+ * A flexible list that can wrap content if the viewport is too narrow.
+ *
+ * 1. Horizontal gap between wrapped flex items. When set, adds an equivalent
+ * negative bottom margin to the list itself to cancel the last item's bottom
+ * margin.
+ */
+
+.flex-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  list-style: none;
+  margin: 0 0 calc(-1 * var(--flex-list-vertical-gap, 0)); /* 1 */
+  padding: 0;
+}
+
+/**
+ * A flexible list item.
+ *
+ * 1. Maximum item width. Item doesn't grow, but shrinks when necessary (default
+ * behavior).
+ * 2. Styles for .title elements in an item.
+ * 3. Horizontal centering, especially for items that are wrapped to new lines.
+ * 4. Vertical gap between flex items.
+ */
+
+.flex-list-item {
+  --title-size: 2.4rem; /* 2 */
+  --title-transform: none; /* 2 */
+  --subtitle-margin-bottom: 0;
+  background: var(--flex-list-item-background, inherit);
+  flex-basis: 35rem; /* 1 */
+  margin: 0 auto var(--flex-list-vertical-gap, 0); /* 3, 4 */
+  text-align: center;
+}
+
+/** COMMON */
+
+.title,
+.subtitle {
+  text-align: var(--title-align, center);
+}
+
+/**
+ * A title can be a title of a section, or a title in a list item. Styles can be
+ * set depending on context (e.g., item titles are smaller than section titles).
+ */
+
+.title {
+  color: var(--title-color, var(--color-black));
+  font-size: var(--title-size, 4rem);
+  line-height: var(--title-line-height, 1.2);
+  text-transform: var(--title-transform, uppercase);
+  margin-bottom: var(--title-margin-bottom, 1.5rem);
+}
+
+/**
+ * A section subtitle. Placed directly under a section title.
+ */
+
+.subtitle {
+  font-family: 'Droid Serif', var(--system-font-stack);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--subtitle-size);
+  margin-bottom: var(--subtitle-margin-bottom, 7.5rem);
+}
+
+/**
+ * Icon in a circle. Applied directly on Font Awesome icons:
+ *
+ * <span class="service-icon fas fa-..."></span>
+ *
+ * 1. Center the icon within the circle.
+ * 2. Some breathing space between the icon and the circle edge.
+ */
+
+.icon {
+  align-items: center; /* 1 */
+  display: flex; /* 1 */
+  justify-content: center; /* 1 */
+  padding: 2rem; /* 2 */
+  height: var(--icon-size);
+  width: var(--icon-size);
+  background: var(--icon-color);
+  border-radius: 50%;
+  color: #fff;
+  font-size: var(--icon-font-size);
+  margin: 0 auto var(--icon-margin-bottom);
+  transition: background ease-in-out .25s;
+}
+
+/**
+ * Generic button widget.
+ *
+ * 1. I'd prefer not add alignment styles here, but since there are only two
+ * buttons in the page (both of which are centered), I'll allow it.
+ */
+
+.btn {
+  background: var(--color-primary);
+  border-radius: .3rem;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: block; /* 1 */
+  font: 700 1.8rem/1 'Montserrat';
+  margin: 0 auto; /* 1 */
+  padding: 2.5rem 4rem;
+  text-transform: uppercase;
+  transition: all ease-in-out .2s;
+  transition-property: background, box-shadow;
+}
+
+.btn:hover,
+.btn:focus {
+  background: var(--color-primary-dark);
+}
+
+.btn:focus {
+  box-shadow: 0 0 0 .3rem var(--color-primary-transparent);
+  outline: 0;
+}
+
+/**
+ * Remove Firefox focus dots.
+ */
+
+.btn::-moz-focus-inner {
+  border: none;
+}
+
+/** NAVBAR */
+
+.navbar {
+  --link-decoration-hover: none;
+  background: var(--color-black);
+  padding: 1rem 0;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+}
+
+.navbar a {
+  display: block;
+  padding: var(--link-padding, 1rem) 0;
+}
+
+.navbar-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-brand {
+  --link-padding: .4rem;
+  font-family: 'Caveat', cursive;
+  font-weight: 400;
+  margin: 0;
+}
+
+.navbar-toggle {
+  background: var(--color-primary);
+  border-radius: .3rem;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 1rem 2rem;
+  text-transform: uppercase;
+}
+
+.navbar-links {
+  --link-color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.4rem;
+  max-height: 0;
+  list-style: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.navbar-links.active {
+  max-height: 9999px;
+}
+
+@media screen and (min-width: 992px) {
+  .navbar {
+    padding: 0;
+  }
+  
+  .navbar-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .nav-brand a {
+    padding: 1rem 0;
+  }
+
+  .navbar-toggle {
+    display: none;
+  }
+  
+  .navbar-links {
+    max-height: 9999px;
+    display: flex;
+    overflow: unset;
+  }
+  
+  .navbar-links a {
+    padding: 1.5rem;
+  }
+}
+
+/** MASTHEAD */
+
+.masthead {
+  --subtitle-margin-bottom: 2rem;
+  --subtitle-size: 2.4rem;
+  --title-color: #fff;
+  --title-line-height: 1;
+  --title-margin-bottom: 3rem;
+  --title-size: 5rem;
+  background:
+    linear-gradient(0, rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)),
+    #272526 center / cover url('https://images.pexels.com/photos/1841841/pexels-photo-1841841.jpeg?auto=compress&cs=tinysrgb&fit=crop&crop=entropy&w=1200&h=800');
+  color: #fff;
+  padding: 24rem 0 16rem;
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .masthead {
+    --subtitle-size: 4rem;
+    --title-margin-bottom: 5rem;
+    --title-size: 7.5rem;
+    padding: 30rem 0 20rem;
+  }
+}
+
+/** SERVICES */
+
+.services {
+  --flex-list-vertical-gap: 0;
+  --icon-size: 12.5rem;
+  --icon-font-size: 6.4rem;
+  --icon-color: var(--color-primary);
+  --icon-margin-bottom: 1.5rem;
+  padding: 16rem 0;
+}
+
+/** PORTFOLIO */
+
+.portfolio {
+  --flex-list-vertical-gap: 3rem;
+  --flex-list-item-background: #fff;
+  background: var(--color-lightgray);
+  padding: 16rem 0;
+}
+
+/**
+ * A portflio item consists of a title, an image and a subtitle.
+ *
+ * 1. Allow reordering of image before title.
+ */
+
+.portfolio-item {
+  --title-margin-bottom: 0;
+  --subtitle-margin-bottom: 2.5rem;
+  display: flex; /* 1 */
+  flex-direction: column; /* 1 */
+}
+
+.portfolio-image {
+  display: block;
+  height: auto;
+  margin: 0 auto 2.5rem;
+  max-width: 350px;
+  width: 100%;
+  order: -1; /* 1 */
+}
+
+/** ABOUT */
+
+.about {
+  --content-max-size: 90rem;
+  padding: 16rem 0;
+}
+
+.timeline {
+  --title-color: var(--color-black);
+  --title-size: 2.4rem;
+  --title-transform: none;
+  --borders-color: #e9ecef;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+.timeline::before {
+  background: var(--borders-color);
+  content: '';
+  display: block;
+  height: 100%;
+  left: 0;
+  margin-left: 4.8rem;
+  position: absolute;
+  width: .2rem;
+}
+
+/**
+ * A timeline item. An item consists of a title, text, and a decorative image
+ * which is centered along the timeline. By default the graphic is on the left
+ * and the text is left-aligned.
+ *
+ * On wider viewports the timeline graphic is positioned on the center. Each
+ * item then alternates between being on the left and right side of the graphic.
+ *
+ * 1. Title and text alignment. Titles are set to be centered, so a custom
+ * property has to be introduced here.
+ * 2. Allocate space for the item image.
+ * 3. Image positioning. Center the image within the item's left margin.
+ */
+
+.timeline-item {
+  --align: left; /* 1 */
+  --title-align: var(--align); /* 1 */
+  --image-offset: -9rem; /* 3 */
+  --image-left: var(--image-offset); /* 3 */
+  --image-size: 8rem;
+  margin-bottom: 5rem;
+  margin-left: 10rem; /* 2 */
+  position: relative;
+  text-align: var(--align);
+}
+
+/**
+ * A timeline item's image. Left-aligned on mobile, centered otherwise.
+ */
+
+.timeline-item::before {
+  background: var(--background-fallback) center / cover var(--background);
+  border-radius: 50%;
+  border: .8rem solid var(--borders-color);
+  content: '';
+  display: block;
+  height: var(--image-size);
+  left: var(--image-left);
+  right: var(--image-right);
+  position: absolute;
+  width: var(--image-size);
+}
+
+/**
+ * The last "node" is not an image, but contains text. Since the content will
+ * not be picked up by screen readers, it's important that this item has the
+ * same text in markup (but visually hidden).
+ *
+ * 1. Explicit height to compensate for lack of content in normal flow.
+ */
+
+.timeline-item:last-child {
+  height: var(--image-size); /* 1 */
+  margin-bottom: 0;
+}
+
+.timeline-item:last-child::before {
+  align-items: center;
+  background: var(--color-primary);
+  color: #fff;
+  content: 'Be Part Of Our Story!';
+  justify-content: center;
+  display: flex;
+  font: 700 1rem/1.4 'Montserrat', sans-serif;
+  text-align: center;
+}
+
+@media screen and (min-width: 992px) {
+  .timeline-item:last-child::before {
+    font-size: 1.6rem;
+  }
+}
+
+/**
+ * Images and fallback colors for each item image.
+ */
+
+.timeline-item:first-child {
+  --background: url('https://images.pexels.com/photos/618833/pexels-photo-618833.jpeg?auto=compress&cs=tinysrgb&fit=crop&crop=entropy&w=160&h=160');
+  --background-fallback: #483c31;
+}
+.timeline-item:nth-child(2) {
+  --background: url('https://images.pexels.com/photos/1098745/pexels-photo-1098745.jpeg?auto=compress&cs=tinysrgb&fit=crop&crop=entropy&w=160&h=160');
+  --background-fallback: #78520f;
+}
+.timeline-item:nth-child(3) {
+  --background: url('https://images.pexels.com/photos/257897/pexels-photo-257897.jpeg?auto=compress&cs=tinysrgb&fit=crop&crop=entropy&w=160&h=160');
+  --background-fallback: #2c2c2c;
+}
+.timeline-item:nth-child(4) {
+  --background: url('https://images.pexels.com/photos/9754/mountains-clouds-forest-fog.jpg?auto=compress&cs=tinysrgb&fit=crop&crop=entropy&w=160&h=160');
+  --background-fallback: #608091;
+}
+
+/**
+ * 1. From here onwards, the timeline graphic is horizontally centered. Each
+ * item alternates on the left and right side of the graphic.
+ */
+
+@media screen and (min-width: 768px) { /* 1 */
+  /**
+   * 1. Center timeline bar.
+   */
+
+  .timeline::before {
+    margin-left: calc(50% - .1rem); /* 1 */
+  }
+  
+  /**
+   * 1. Position image to timeline center, allocating 3rem breathing space
+   * between image edge and text.
+   * 2. Use as much of the whole timeline element's half width as possible while
+   * maintaining 3rem breathing space.
+   * 3. Push even-numbered items to the right.
+   */
+  
+  .timeline-item {
+    --image-size: 10rem;
+    --image-offset: calc(-1 * var(--image-size) - 3rem); /* 1 */
+    --half-space: calc(var(--image-size) / 2 + 3rem);
+    max-width: calc(50% - var(--half-space)); /* 2 */
+    margin-bottom: 15rem;
+    margin-left: calc(50% + var(--half-space)); /* 3 */
+  }
+  
+  /**
+   * The odd-numbered items are more of a special case. Their image is
+   * positioned to the right of their text, so it's necessary to unset the left
+   * property [1]. The text is also right-aligned [2]. Finally it's necessary to
+   * remove the initial left margin, since the image is no longer there [3].
+   */
+  
+  .timeline-item:nth-child(odd) {
+    --align: right; /* 2 */
+    --image-left: unset; /* 1 */
+    --image-right: var(--image-offset); /* 1 */
+    margin-left: 0; /* 3 */
+  }
+}
+
+/**
+ * 1. The image just gets larger from here. The offsets and such are derived
+ * from the image size.
+ */
+
+@media screen and (min-width: 992px) { /* 1 */
+  .timeline-item { --image-size: 15rem; }
+}
+
+@media screen and (min-width: 1200px) {
+  .timeline-item { --image-size: 17rem; }
+}
+
+/** TEAM */
+
+.team {
+  --flex-list-vertical-gap: 5rem;
+  background: var(--color-lightgray);
+  padding: 16rem 0;
+}
+
+.team-members {
+  margin-bottom: 3rem;
+}
+
+.team-member {
+  --title-margin-bottom: 0;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.team-member-portrait {
+  border-radius: 50%;
+  border: .75rem solid #fff;
+  margin-bottom: 2rem;
+  order: -1;
+}
+
+.team-bottom-prose {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 72rem;
+}
+
+/** CONTACT */
+
+.contact {
+  --title-color: #fff;
+  background: var(--color-black);
+  color: #fff;
+  padding: 16rem 0;
+}
+
+.form-columns {
+  --spacer: 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: calc(-1 * var(--spacer));
+}
+
+.form-column {
+  flex: 1 1 35rem;
+  margin-left: var(--spacer);
+  margin-bottom: var(--spacer);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  font: 1.6rem/1.4 'Roboto', sans-serif;
+  padding: 2rem;
+  border-radius: .3rem;
+  border: .1rem solid var(--color-lightgray);
+  background: #fff;
+}
+
+.form-control:focus {
+  border-color: var(--color-primary);
+}
+
+.form-name,
+.form-email {
+  margin-bottom: var(--spacer);
+}
+
+.form-message {
+  display: block;
+  width: 100%;
+  height: 100%;
+  resize: vertical;
+}
+
+.form-submit {
+  grid-column: submit;
+}
+
+/** SOCIAL MEDIA LINKS */
+
+.social {
+  --gap: 1.25rem;
+  --icon-size: 5rem;
+  --icon-font-size: 2rem;
+  --icon-color: var(--color-black);
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  margin-right: calc(-1 * var(--gap));
+  padding: 0;
+}
+
+.social-item {
+  margin-right: var(--gap);
+}
+
+.social a:hover,
+.social a:focus {
+  --icon-color: var(--color-primary);
+}
+
+.social a:hover {
+  text-decoration: none;
+}
+
+.social a:focus {
+  outline: 0;
+}
+
+/** FOOTER */
+
+/**
+ * The footer uses a stacking layout by default, and uses a horizontal flex
+ * layout on larger viewports.
+ */
+
+.footer {
+  --icon-margin-bottom: 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.4rem;
+  padding: 2.5rem 0;
+  text-align: center;
+}
+
+.footer-links a:first-child {
+  margin-right: 2rem;
+}
+
+/**
+ * It's easier to use media queries to achieve the horizontal layout.
+ * I don't know if there's an entirely flex-based solution to achieve the same
+ * effect.
+ */
+
+@media screen and (min-width: 768px) {
+  .footer {
+    --icon-margin-bottom: 0;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    text-align: initial;
+  }
+  
+  .copyright {
+    margin: 0;
+  }
+}
